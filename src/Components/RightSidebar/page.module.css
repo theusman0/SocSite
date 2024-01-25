@@ -1,0 +1,10 @@
+.listClass {
+    display: flex;
+    width: 40%;
+    padding: 10px 0px;
+    transition: 0.3s;
+}
+
+.listClass:hover {
+    font-size: 21px;
+}

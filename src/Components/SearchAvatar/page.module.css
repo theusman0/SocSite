@@ -1,0 +1,28 @@
+.clipPath {
+    clip-path: circle();
+    
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #344502;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: 500;
+    color: #AfAF02;
+}
+
+.email {
+    font-size: 13px;
+    font-weight: 200;
+}
+
+.SearchAvatar{
+    transition: 0.4s;
+}
+.SearchAvatar:hover {
+    margin-left: 5px;
+}

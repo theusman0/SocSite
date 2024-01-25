@@ -1,0 +1,11 @@
+.clipPath {
+    border-bottom-left-radius: 50% 40%;
+    overflow: hidden;
+}
+
+.clipPathProfile {
+    clip-path: circle();
+    position: absolute;
+    left: 30%;
+    overflow: hidden;
+}
