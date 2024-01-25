@@ -15,53 +15,26 @@ export const GET = async (request) => {
         const userId = request.user.id;
         const user = await UserModel.findById(userId);
 
-        let posts = await Post.find({
-            user: { $in: [user.id] }
-        })
+        let posts = await Post.find()
             .sort({ createdAt: -1 })
             .populate({
                 path: "user likes",
                 select: "email username name pic",
             });
 
+        
 
-        if (posts.length === 0) {
-            posts = await Post.aggregate([
-                { $match: { user: user.id } },
-                { $sample: { size: 7 } },
-                {
-                    $lookup: {
-                        from: "users",
-                        localField: "user",
-                        foreignField: "_id",
-                        as: "userDetails"
-                    }
-                },
-                {
-                    $unwind: "$userDetails"
-                },
-                {
-                    $project: {
-                        _id: 1,
-                        caption: 1,
-                        content: 1,
-                        image: 1,
-                        video: 1,
-                        likes: 1,
-                        comment: 1,
-                        createdAt: 1,
-                        updatedAt: 1,
-                        user: {
-                            _id: "$userDetails._id",
-                            email: "$userDetails.email",
-                            username: "$userDetails.username",
-                            name: "$userDetails.name",
-                            pic: "$userDetails.pic"
-                        }
-                    }
-                },
-            ]);
-        }
+        posts.sort((a, b) => {
+            const likesA = a.likes ? a.likes.length : 0;
+            const likesB = b.likes ? b.likes.length : 0;
+
+            if (likesB !== likesA) {
+                return likesB - likesA;
+            }
+
+            
+            return new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt);
+        });
 
         return NextResponse.json({ success: true, posts });
     } catch (error) {

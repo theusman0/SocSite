@@ -48,12 +48,6 @@ const RightSidebar = () => {
                 <Box className={styles.listClass}>
                     <span><Image src={'/feed.png'} width={28} height={28} /></span>&nbsp;&nbsp;<Link href={"/feed"}>Feed</Link>
                 </Box>
-                <Box className={styles.listClass}>
-                    <span><Image src={'/following.png'} width={28} height={28} /></span>&nbsp;&nbsp;<Link href={"/"}>Following</Link>
-                </Box>
-                <Box className={styles.listClass}>
-                    <span><Image src={'/follower.png'} width={28} height={28} /></span>&nbsp;&nbsp;<Link href={"/"}>Follower</Link>
-                </Box>
 
             </Box>
         </div>
