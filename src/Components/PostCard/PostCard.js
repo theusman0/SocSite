@@ -116,7 +116,7 @@ const PostCard = ({ post }) => {
                             <Image src={like} width={35} height={35} onClick={onClickLike} />
                         </div>
                         <div >
-                            <Link href={'/comment'} as={`/comment`}>
+                            <Link href={'/postpage/' + post._id} >
                                 <Image src={"/comment.png"} width={40} height={40} />
                             </Link>
                         </div>

@@ -57,7 +57,9 @@ export default function page({params}) {
                     
                     rows={4}
                 />
-                <Button>
+                <Button
+                    marginTop={'10px'}
+                >
                     Comment
                 </Button>
             </Box>
