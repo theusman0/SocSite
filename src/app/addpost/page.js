@@ -1,7 +1,7 @@
 "use client"
 
 import { FormControl, FormLabel, Input, VStack, Button, Box, Textarea, Heading } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import Loader from '@/Components/Loader/Loader'
@@ -101,7 +101,7 @@ function page() {
                 <FormControl isRequired
                     m={'5px 0px 5px 0px'}>
                     <FormLabel fontWeight={900}>
-                        Enter your Password
+                        Enter your Content
                     </FormLabel>
                     <Textarea
                         value={formData.content}

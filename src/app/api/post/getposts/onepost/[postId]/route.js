@@ -24,15 +24,6 @@ export const GET = async (request, { params }) => {
         if (!post) {
             return NextResponse.json({ success: false, error: "Post not found" });
         }
-
-        const comments = await Comment.find({ _id: { $in: post.comment } })
-            .populate({
-                path: "user",
-                select: "email username name pic"
-            });
-        
-        post.comment = comments;
-
         return NextResponse.json({ success: true, post });
     } catch (error) {
         console.log(error);

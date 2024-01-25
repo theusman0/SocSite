@@ -8,14 +8,11 @@ export const POST = async (request, { params }) => {
         if (await IsLogin(request) === false) {
             return NextResponse.json({success: false, error: "invalid token"})
         }
-        const user = await UserModel.findById(request.user.id).populate({
-            path: "following follower",
-            select: "name username pic email"
-        })
+        const user = await UserModel.findById(request.user.id);
         if (user) {
             return NextResponse.json({success: true, error:"user not exists"})
         }
-
+        
         return NextResponse.json({ success: true, user })
     } catch (error) {
         console.log(error);

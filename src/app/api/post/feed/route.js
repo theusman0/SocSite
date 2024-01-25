@@ -15,14 +15,53 @@ export const GET = async (request) => {
         const userId = request.user.id;
         const user = await UserModel.findById(userId);
 
-        const posts = await Post.find({
-            user: { $in: [userId, ...user.follower, ...user.following] }
+        let posts = await Post.find({
+            user: { $in: [user.id] }
         })
             .sort({ createdAt: -1 })
             .populate({
                 path: "user likes",
                 select: "email username name pic",
-            })
+            });
+
+
+        if (posts.length === 0) {
+            posts = await Post.aggregate([
+                { $match: { user: user.id } },
+                { $sample: { size: 7 } },
+                {
+                    $lookup: {
+                        from: "users",
+                        localField: "user",
+                        foreignField: "_id",
+                        as: "userDetails"
+                    }
+                },
+                {
+                    $unwind: "$userDetails"
+                },
+                {
+                    $project: {
+                        _id: 1,
+                        caption: 1,
+                        content: 1,
+                        image: 1,
+                        video: 1,
+                        likes: 1,
+                        comment: 1,
+                        createdAt: 1,
+                        updatedAt: 1,
+                        user: {
+                            _id: "$userDetails._id",
+                            email: "$userDetails.email",
+                            username: "$userDetails.username",
+                            name: "$userDetails.name",
+                            pic: "$userDetails.pic"
+                        }
+                    }
+                },
+            ]);
+        }
 
         return NextResponse.json({ success: true, posts });
     } catch (error) {

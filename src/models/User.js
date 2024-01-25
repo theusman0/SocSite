@@ -35,12 +35,11 @@ const UserSchema = new mongoose.Schema({
         default: false
     },
     following: {
-        type: [mongoose.Schema.Types.ObjectId],
+        type: [mongoose.Schema.Types.Mixed],
         ref:"User"
     },
     follower: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "User"
+        type: [mongoose.Schema.Types.Mixed],
     }
 }, {
     timestamps: true, 

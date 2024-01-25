@@ -93,8 +93,11 @@ const Navbar = () => {
                                 <Image src={'/dots.png'} width={32} height={32} />
                             </MenuButton>
                             <MenuList>
-                                <Link href={'/addpost'}>
-                                    <MenuItem>Write Post</MenuItem> </Link>
+                                {user && <MenuItem display={{base: "block", md: "none", xl: "none"}}><Link href={'/'}>Profile</Link></MenuItem> }
+                                {user && <MenuItem display={{base: "block", md: "none", xl: "none"}}><Link href={'/profile/' + user.username}>Profile</Link></MenuItem>}
+                                {user && <MenuItem display={{base: "block", md: "none", xl: "none"}}><Link href={'/feed'}>Feed</Link></MenuItem> }
+                                {user && <MenuItem display={{base: "block", md: "none", xl: "none"}}><Link href={'/following'}>Following</Link></MenuItem> }
+                                {user && <MenuItem display={{base: "block", md: "none", xl: "none"}}><Link href={'/follower'}>Follower</Link></MenuItem> }
                                 <MenuItem onClick={() => {
                                     localStorage.removeItem('token')
                                     localStorage.removeItem('user')

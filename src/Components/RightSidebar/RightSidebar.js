@@ -23,7 +23,7 @@ const RightSidebar = () => {
         <div className='RightSidebar'>
             <Box
                 width={{ xl: '350px', md: '300px' }}
-                marginRight={{ base: 'none', md: 'flex', xl: 'flex' }}
+                display={{ base: 'none', md: 'flex', xl: 'flex' }}
                 fontSize={'20px'}
                 fontWeight={500}
                 flexDirection='column'
@@ -34,6 +34,7 @@ const RightSidebar = () => {
                 padding={"20px 40px"}
                 borderLeft="1px solid #344502"
             >
+                
                 {user &&
                     <SideProfile width={280} height={200} profileHeight={90} profileWidth={90} isProfile={false} top={75} marginTop={15} user={user} />
                 }
